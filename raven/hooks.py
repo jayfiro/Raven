@@ -1,3 +1,5 @@
+import frappe
+
 from . import __version__ as app_version
 
 app_name = "raven"
@@ -16,7 +18,12 @@ app_logo_url = "/assets/raven/raven_logo.svg"
 # include js, css files in header of desk.html
 app_include_js = "raven.bundle.js"
 # Raven's own desk icons, e.g. frappe.utils.icon("raven").
-app_include_icons = ["/assets/raven/icons/raven.svg"]
+# Frappe 15 prefixes each entry with "/assets/" itself; Frappe 16 expects the full path.
+app_include_icons = [
+	"raven/icons/raven.svg"
+	if frappe.__version__.startswith("15.")
+	else "/assets/raven/icons/raven.svg"
+]
 
 add_to_apps_screen = [
 	{
